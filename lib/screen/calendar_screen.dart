@@ -1,3 +1,4 @@
+import 'package:todolist_project/Widgets/main_calendar.dart';
 import 'package:flutter/material.dart';
 
 class CalendarScreen extends StatelessWidget {
@@ -6,7 +7,13 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("CalendarScreen"),
+      body: SafeArea(
+        child: Column(
+          children: [
+            MainCalendar(),
+          ],
+        ),
+      ),
     );
   }
 }
