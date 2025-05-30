@@ -33,6 +33,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
+
   void onDaySelected(DateTime selected, DateTime focusedDate) {
     setState(() {
       this.selectedDate = selected;
