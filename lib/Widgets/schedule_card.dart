@@ -1,6 +1,52 @@
 import 'package:todolist_project/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
+class ScheduleCard extends StatelessWidget {
+  final int startTime;
+  final int endTime;
+  final String content;
+
+  const ScheduleCard({
+    required this.startTime,
+    required this.endTime,
+    required this.content,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all( // 테두리 굵기
+          width: 1.0,
+          color: PRIMARY_COLOR,
+        ),
+        borderRadius: BorderRadius.circular(8.0), // 모서리 둥글게
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: IntrinsicHeight( // 자식 위젯의 높이를 기준으로 최대높이에 맞춤?
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _Time( // 시작과 종료 시간을 보여줄 위젯
+                startTime: startTime,
+                endTime: endTime,
+              ),
+              SizedBox(width: 16.0),
+              _Content( // 일정 내용을 보여줄위젯
+                  content: content
+              ),
+              SizedBox(width: 16.0),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _Time extends StatelessWidget {
   final int startTime;
   final int endTime;
