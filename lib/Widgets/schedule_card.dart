@@ -26,9 +26,9 @@ class ScheduleCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: IntrinsicHeight( // 자식 위젯의 높이를 기준으로 최대높이에 맞춤?
+        child: IntrinsicHeight( // Row의 전체 높이를 내부 위젯 중 가장 높은 위젯에 맞춤
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch, // 각 자식 위젯의 높이를 Row의 높이에 맞춰서 늘림
             children: [
               _Time( // 시작과 종료 시간을 보여줄 위젯
                 startTime: startTime,
