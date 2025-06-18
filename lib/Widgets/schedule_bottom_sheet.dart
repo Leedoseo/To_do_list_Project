@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ScheduleBottomSheet extends StatefulWidget {
-  const ScheduleBottomSheet({Key? : key}) : super(key: key);
+  const ScheduleBottomSheet({Key? key}) : super(key: key);
 
   @override
 
   State<ScheduleBottomSheet> createState() => _ScheduleBottomSheetState();
 }
 
-class _ScheduleBottomSheetSate extends State<ScheduleBottomSheet> {
+class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
 
   @override
 
