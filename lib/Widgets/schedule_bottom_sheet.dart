@@ -1,3 +1,4 @@
+import 'package:todolist_project/Widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleBottomSheet extends StatefulWidget {
@@ -17,6 +18,9 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
       child: Container(
         height: MediaQuery.of(context).size.height / 2,
         color: Colors.white,
+        child: CustomTextField(
+          label: "시작 시간",
+        ),
       ),
     );
   }

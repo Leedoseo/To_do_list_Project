@@ -5,7 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String label;
 
   const CustomTextField({
-    requried this.laber,
+    required this.label,
     Key? key,
   }) : super(key: key);
 
