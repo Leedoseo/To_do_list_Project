@@ -1,6 +1,8 @@
 import 'package:todolist_project/Widgets/schedule_card.dart';
 import 'package:todolist_project/Widgets/main_calendar.dart';
 import 'package:todolist_project/Widgets/today_banner.dart';
+import 'package:todolist_project/Widgets/schedule_bottom_sheet.dart';
+import 'package:todolist_project/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CalendarScreen extends StatefulWidget { // StatefulWidget으로 전환
@@ -22,6 +24,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold( // 화면 전체에 틀 잡아줌
+      floatingActionButton: FloatingActionButton( // 새 일정 버튼
+        backgroundColor: PRIMARY_COLOR,
+          onPressed: () {
+            showModalBottomSheet( // BottomSheet 열기(모달 창)
+              context: context,
+              isDismissible: true, // 배경을 탭했을 때 BottomSheet 닫기
+              builder: (_) => ScheduleBottomSheet(),
+              isScrollControlled: true, // BottomSheeet의 높이를 화면의 최대 높으로 정의하고 스크롤 가능하게 변경
+            );
+          },
+        child: Icon( // + 모양의 버튼으로 설정
+          Icons.add,
+        ),
+      ),
       body: SafeArea( // 틀 안에 SafeArea로 구역 지정
         child: Column( // 세로 배치
           children: [

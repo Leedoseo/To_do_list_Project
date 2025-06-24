@@ -15,6 +15,7 @@ class MainCalendar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return TableCalendar(
+      locale: "ko_kr",
       onDaySelected: onDaySelected, // 날짜 선택시 실행할 함수
       selectedDayPredicate: (date) =>
           date.year == selectedDate.year &&
