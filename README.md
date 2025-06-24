@@ -1,16 +1,26 @@
-# todolist_project
+# 일정관리 앱 개인 프로젝트
 
-A new Flutter project.
+## 🖼️ 메인화면 1차 구현
 
-## Getting Started
+<p align="center">
+  <img src="./images/images1.0_1.png" alt="캘린더 화면" width="300"/>
+  <img src="./images/images1.0_2.png" alt="일정 추가 화면" width="300"/>
+</p>
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+<br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ 기능 설명
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 사용자는 달력에서 날짜를 선택할 수 있음
+- + 버튼을 누르면 일정을 추가 하는 화면이 생김 → 모달창
+
+---
+
+<br>
+
+## 🎯 2차 구현 목표
+
+- UI 개선  
+- 저장 버튼 활성화
