@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="./images/images1.0_1.png" alt="캘린더 화면" width="300"/>
-  <img src="./images/images1.0_2.png" alt="일정 추가 화면" width="300"/>
+  <img src="./images/iamges1.0_2.png" alt="일정 추가 화면" width="300"/>
 </p>
 
 <p align="center">
