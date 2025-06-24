@@ -41,7 +41,7 @@ final List<AppTheme> availableThemes = [ // 사용자가 고를 수 있는 테�
     primaryColor: AppThemeColors.babyPurple,
     backgroundColor: Colors.white,
   ),
-  AppTheme(Sㅎ
+  AppTheme(
     name: 'Cream',
     primaryColor: AppThemeColors.softCream,
     backgroundColor: Colors.white,
