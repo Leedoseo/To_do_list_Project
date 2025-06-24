@@ -31,6 +31,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               context: context,
               isDismissible: true, // 배경을 탭했을 때 BottomSheet 닫기
               builder: (_) => ScheduleBottomSheet(),
+              isScrollControlled: true, // BottomSheeet의 높이를 화면의 최대 높으로 정의하고 스크롤 가능하게 변경
             );
           },
         child: Icon( // + 모양의 버튼으로 설정
