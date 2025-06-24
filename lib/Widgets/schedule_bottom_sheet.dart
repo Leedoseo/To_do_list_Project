@@ -15,12 +15,15 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
   @override
 
   Widget build(BuildContext context) {
+
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom; // 키보드 높이 가져오기
+
     return SafeArea(
       child: Container(
-        height: MediaQuery.of(context).size.height / 2,
+        height: MediaQuery.of(context).size.height / 2 + bottomInset, // 화면 반 높이에 키보드 높이 추가하기
         color: Colors.white,
-        child: Padding( //
-          padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+        child: Padding(
+          padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: bottomInset),
           child: Column( // 시간 관련 텍스트 필드와 내용 관련 텍스트 필드 세로로 배치
             children: [
               Row( // 시작 시간 종료 시간 가로로 배치
