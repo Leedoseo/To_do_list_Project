@@ -31,12 +31,18 @@ class CommonScaffold extends StatelessWidget {
               leading: Icon(Icons.home),
               title: const Text("캘린더"),
               onTap: () {
+                Navigator.pop(context);
+                if (ModalRoute.of(context)?.settings.name != "/category") {
+                  Navigator.pushReplacementNamed(context, "/category");
+                }
               },
             ),
             ListTile(
               leading: Icon(Icons.timer),
               title: const Text("집중 타이머"),
               onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, "/timer");
               },
             ),
             ListTile(

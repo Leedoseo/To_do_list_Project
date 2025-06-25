@@ -1,4 +1,5 @@
 import 'package:todolist_project/screen/calendar_screen.dart';
+import 'package:todolist_project/screen/timer_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,12 @@ void main() async {
 
   runApp(
     MaterialApp(
-      home: CalendarScreen(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/calendar",
+      routes: {
+        "/calendar" : (context) => const CalendarScreen(),
+        "/timer" : (context) => const TimerScreen(),
+      },
     )
   );
 }
