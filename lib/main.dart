@@ -9,13 +9,13 @@ void main() async {
   await initializeDateFormatting(); // intl 패키지 초기화(다국어화)
 
   runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: "/calendar",
-        routes: {
-          "/calendar" : (context) => const CalendarScreen(),
-          "/timer" : (context) => const TimerScreen(),
-        },
-      )
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/calendar",
+      routes: {
+        "/calendar" : (context) => const CalendarScreen(),
+        "/timer" : (context) => const TimerScreen(),
+      },
+    )
   );
 }
