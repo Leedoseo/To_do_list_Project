@@ -41,7 +41,6 @@ class CommonScaffold extends StatelessWidget {
               leading: Icon(Icons.timer),
               title: const Text("집중 타이머"),
               onTap: () {
-                Navigator.pop(context);
                 Navigator.pushNamed(context, "/timer");
               },
             ),
