@@ -27,7 +27,7 @@ class _TimerScreenState extends State<TimerScreen> {
       });
       timer.cancel();
 
-      // TODO: 이 곳에 알림 또는 통계 저장 코드 추가 예정
+      // 이 곳에 알림 또는 통계 저장 코드 추가 예정
     } else {
       // 아직 시간이 남아 있으면 1초 감소
       setState(() {
