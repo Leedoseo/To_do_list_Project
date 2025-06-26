@@ -1,4 +1,5 @@
 import 'package:todolist_project/screen/calendar_screen.dart';
+import 'package:todolist_project/screen/timer_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,13 @@ void main() async {
   await initializeDateFormatting(); // intl 패키지 초기화(다국어화)
 
   runApp(
-    MaterialApp(
-      home: CalendarScreen(),
-    )
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: "/calendar",
+        routes: {
+          "/calendar" : (context) => const CalendarScreen(),
+          "/timer" : (context) => const TimerScreen(),
+        },
+      )
   );
 }
