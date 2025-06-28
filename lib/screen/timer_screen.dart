@@ -38,12 +38,26 @@ class _TimerScreenState extends State<TimerScreen> {
 
   // 타이머 시작
   void onStartPressed() {
+    // 첫입력인 경우
     final enteredMinutes = int.tryParse(timeController.text);
 
     if (enteredMinutes == null || enteredMinutes <= 0) {
       // 입력 오류 시 안내 메시지
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("유효한 분 단위 시간을 입력해주세요.")),
+      );
+      return;
+    }
+
+    // 일시 정지 후 다시 시작인 경우
+    if (totalSeconds > 0 && !isRunning) {
+      setState(() {
+        isRunning = true;
+      });
+
+      timer = Timer.periodic(
+          const Duration(seconds: 1),
+          onTick,
       );
       return;
     }
@@ -68,8 +82,6 @@ class _TimerScreenState extends State<TimerScreen> {
 
     setState(() {
       isRunning = false;
-      sessionDuration = enteredMinutes * 60;
-      totalSeconds = sessionDuration;
     });
   }
 
@@ -98,6 +110,7 @@ class _TimerScreenState extends State<TimerScreen> {
 
   // 컨트롤러 해제
   @override
+
   void dispose() {
     timeController.dispose();
     super.dispose();
