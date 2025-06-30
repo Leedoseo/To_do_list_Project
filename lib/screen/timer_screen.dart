@@ -31,7 +31,7 @@ class _TimerScreenState extends State<TimerScreen> {
 
       // 세션 종료 시 총 시간 기록
       sessionDuration = lastInputDuration;
-      // TODO: sessionDuration을 통계 저장소에 누적 (SharedPreferences 등)
+      // 나중에 데이터로 저장할 부분
     } else {
       // 아직 시간이 남아 있으면 1초 감소
       setState(() {
