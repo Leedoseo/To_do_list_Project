@@ -31,7 +31,7 @@ class _TimerScreenState extends State<TimerScreen> {
 
       // 세션 종료 시 총 시간 기록
       sessionDuration = lastInputDuration;
-      // 나중에 데이터로 저장할 부분
+      // sessionDuration을 통계 저장소에 누적 (SharedPreferences 등)
     } else {
       // 아직 시간이 남아 있으면 1초 감소
       setState(() {
@@ -58,34 +58,36 @@ class _TimerScreenState extends State<TimerScreen> {
     return duration.toString().split(".").first.substring(2, 7);
   }
 
-  // ▶ 타이머 시작 버튼
+  // 타이머 시작 버튼
   void onStartPressed() {
-    // 일시정지 후 재개: totalSeconds가 남아있고 실행 중이 아닐 때는 그대로 이어서 시작
-    if (!isRunning && totalSeconds > 0) {
+    // 처음 시작하는 경우
+    if (!isRunning && totalSeconds == lastInputDuration) {
+      final seconds = parseTime(timeController.text);
+      if (seconds <= 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("MM:SS 형식으로 입력해주세요.")),
+        );
+        return;
+      }
       setState(() {
+        lastInputDuration = seconds;
+        totalSeconds = seconds;
         isRunning = true;
       });
       timer = Timer.periodic(const Duration(seconds: 1), onTick);
       return;
     }
 
-    // 처음 시작하는 경우
-    final seconds = parseTime(timeController.text);
-    if (seconds <= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("MM:SS 형식으로 입력해주세요.")),
-      );
-      return;
+    // 일시정지 후 다시 시작
+    if (!isRunning && totalSeconds > 0) {
+      setState(() {
+        isRunning = true;
+      });
+      timer = Timer.periodic(const Duration(seconds: 1), onTick);
     }
-    setState(() {
-      lastInputDuration = seconds; // 사용자가 입력한 시간 저장 (입력창 초기화용)
-      totalSeconds = seconds;
-      isRunning = true;
-    });
-    timer = Timer.periodic(const Duration(seconds: 1), onTick);
   }
 
-  // ⏸ 타이머 일시정지 버튼
+  // 타이머 일시정지 버튼
   void onPausePressed() {
     if (timer.isActive) timer.cancel();
     setState(() {
@@ -93,13 +95,14 @@ class _TimerScreenState extends State<TimerScreen> {
     });
   }
 
-  // ⟳ 타이머 초기화 버튼
+  // 타이머 초기화 버튼
   void onRestartPressed() {
     if (timer.isActive) timer.cancel();
     setState(() {
       isRunning = false;
-      // 마지막 입력 시간으로 입력창 복원 (없으면 현재 시간 사용)
-      timeController.text = formatTime(lastInputDuration > 0 ? lastInputDuration : totalSeconds);
+      lastInputDuration = parseTime(timeController.text); // 입력값을 다시 파싱해 저장
+      totalSeconds = lastInputDuration;
+      timeController.text = formatTime(lastInputDuration);
     });
   }
 
@@ -120,15 +123,18 @@ class _TimerScreenState extends State<TimerScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // 입력창 (실행 중이 아닐 때만 보임)
-            if (!isRunning)
+            // 입력창 또는 디지털 시계
+            if (!isRunning && totalSeconds == lastInputDuration)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: timeController,
                   keyboardType: TextInputType.datetime,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                  ),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'MM:SS',
@@ -136,18 +142,16 @@ class _TimerScreenState extends State<TimerScreen> {
                 ),
               )
             else
-            // 실행 중일 때 남은 시간 표시 (디지털 시계 형식)
               Text(
                 formatTime(totalSeconds),
                 style: const TextStyle(
                   fontSize: 72,
                   fontWeight: FontWeight.bold,
-                  fontFeatures: [FontFeature.tabularFigures()], // 숫자 간격 일정 하게 유지
-                  letterSpacing: 2, // 약간의 간격 추가
+                  fontFeatures: [FontFeature.tabularFigures()],
+                  letterSpacing: 2,
                 ),
               ),
-            const SizedBox(height: 64),
-            // 재생, 일시정지, 재시작 버튼
+            // 버튼 영역
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
