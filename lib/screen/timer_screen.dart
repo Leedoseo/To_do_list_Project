@@ -1,7 +1,11 @@
 import 'dart:async'; // 비동기 타이머 기능을 위한 내장 패키지
 import 'dart:ui'; // FontFeature를 사용하기 위해 추가
 import 'package:todolist_project/Widgets/common_scaffold.dart'; // CommonScaffold 불러오기
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'; // Local알림 패키지
 import 'package:flutter/material.dart';
+
+// 알림 객체 전역 선언
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key});
@@ -19,6 +23,68 @@ class _TimerScreenState extends State<TimerScreen> {
   bool isRunning = false;
   late Timer timer;
 
+  // 알림 초기화 (앱 실행시 최초 1회 실행)
+  @override
+
+  void initState() {
+    super.initState();
+
+    // 안드로이드 초기화 설정
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings("@mipmap/ic_launcher");
+
+    // iOS 초기화 설정(권한 요청 포함)
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+          requestAlertPermission: true,
+          requestBadgePermission: true,
+          requestSoundPermission: true,
+        );
+
+    // 플랫폼별 초기화 설정
+    const InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    // 초기화 실행
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  // 알림 띄우는 함수
+  Future<void> showNotification() async {
+    // 안드로이드 알림 style
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          "timer_channel_id",
+          "타이머 알림",
+          importance: Importance.max,
+          priority: Priority.high,
+          showWhen: false,
+        );
+
+    // iOS 알림 style
+    const DarwinNotificationDetails iOSDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    // 통합 알림 설정
+    const NotificationDetails platformDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iOSDetails,
+    );
+
+    // 알림 호출
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      "타이머 종료",
+      "설정한 시간이 모두 지났습니다!",
+      platformDetails,
+    );
+  }
+
   void onTick(Timer timer) {
     if (totalSeconds == 0) {
       setState(() {
@@ -27,6 +93,8 @@ class _TimerScreenState extends State<TimerScreen> {
       timer.cancel();
 
       sessionDuration = lastInputDuration;
+
+      showNotification(); // 알림 호출
       // sessionDuration 저장 로직 (예: SharedPreferences)
     } else {
       setState(() {
