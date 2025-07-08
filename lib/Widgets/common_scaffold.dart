@@ -32,8 +32,8 @@ class CommonScaffold extends StatelessWidget {
               title: const Text("캘린더"),
               onTap: () {
                 Navigator.pop(context);
-                if (ModalRoute.of(context)?.settings.name != "/category") {
-                  Navigator.pushReplacementNamed(context, "/category");
+                if (ModalRoute.of(context)?.settings.name != "/calendar") {
+                  Navigator.pushReplacementNamed(context, "/calendar");
                 }
               },
             ),
