@@ -1,5 +1,6 @@
 import 'package:todolist_project/screen/calendar_screen.dart';
 import 'package:todolist_project/screen/timer_screen.dart';
+import 'package:todolist_project/screen/subject_category_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ void main() async {
       routes: {
         "/calendar" : (context) => const CalendarScreen(),
         "/timer" : (context) => const TimerScreen(),
+        "/category" : (context) => const SubjectCategoryScreen(),
       },
     )
   );
