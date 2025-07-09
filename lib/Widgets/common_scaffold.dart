@@ -33,7 +33,7 @@ class CommonScaffold extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (ModalRoute.of(context)?.settings.name != "/calendar") {
-                  Navigator.pushReplacementNamed(context, "/calendar");
+                  Navigator.pushNamed(context, "/calendar");
                 }
               },
             ),
@@ -54,7 +54,8 @@ class CommonScaffold extends StatelessWidget {
               leading: Icon(Icons.category),
               title: const Text("과목/카테고리 관리"),
               onTap: () {
-                Navigator.pushNamed(context, "/category");
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, "/category");
               },
             ),
             ListTile(
