@@ -54,6 +54,7 @@ class CommonScaffold extends StatelessWidget {
               leading: Icon(Icons.category),
               title: const Text("과목/카테고리 관리"),
               onTap: () {
+                Navigator.pushNamed(context, "/category");
               },
             ),
             ListTile(
